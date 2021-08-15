@@ -1,0 +1,25 @@
+# Curso Django Rest Framework | Cero a Experto
+
+## Vistas De Django rest framework
+
+### _APIVIEW_
+
+- Mas control spbre la logica
+- Bueno para logica compleja
+- Llamar otras APIS
+- Trabajar con archivos locales
+
+**Que es ?**
+
+- Usa metodos HTTP estandadr
+- get()
+- post()
+- ...
+
+**Cuando Usar APIVIEW**
+
+- Si necesitas control de la logica
+- Proceso de archivos y renderizar respuestas sincronizada
+- Llamado a otras APIS / Servicios
+- Acceso a archivos locales o cualquier tipo de datos
+
