@@ -1,3 +1,4 @@
+from rest_framework.serializers import Serializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -54,6 +55,8 @@ class InformationApiView(APIView):
 class InformationViewSet(viewsets.ViewSet):
     """ Test API ViewSet """
 
+    serializer_class = serializers.InformationSerializer
+
     def list(self, request):
         """ Retorna mensaje de Hola Mundo """
 
@@ -63,6 +66,39 @@ class InformationViewSet(viewsets.ViewSet):
             'Provee mas funcionalidad con menos codigo',
         ]
         return Response({'message':'Hola !','a_viewset':a_viewset})
+
+    def create(self, request):
+        """ Crea un nuevo mensaje de hola mundo. """
+
+        serializer = self.serializer_class(data=request.data)
+
+        if serializer.is_valid():
+            name = serializer.validated_data.get('name')
+            message = f'Hello {name}'
+            return Response({
+                'message':message
+            })
+        else:
+            return Response(
+                serializer.errors,
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+    def retrieve(self, request, pk=None):
+        """ Obtiene un Objeto y su ID """
+        return Response({'http_method':'GET'})
+
+    def update(self, request, pk=None):
+        """ Actualiza un Objeto """
+        return Response({'http_method':'PUT'})
+
+    def partial_update(self, request, pk=None):
+        """ Actualiza parcialmente el Objeto """
+        return Response({'http_method':'PATCH'})
+
+    def destroy(self, request, pk=None):
+        """ Destruye un Objeto """
+        return Response({'http_method':'DELETE'})
 
 
 
