@@ -37,5 +37,21 @@ class InformationApiView(APIView):
                 status=status.HTTP_400_BAD_REQUEST
             )
 
+    def put(self, request, pk=None):
+        """ Maneja actulizar un objeto """
+        return Response({'method':'PUT'})
+
+    def patch(self, request, pk=None):
+        """ Maneja actulizacion parcial de un objeto """
+        return Response({'method':'PATCH'})
+
+    def delete(self, request, pk=None):
+        """ Borrar un objeto """
+        return Response({'method':'DELETE'})
+
+    
+
+
+
 
 
