@@ -1,6 +1,8 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework import viewsets
+
 from . import serializers
 
 class InformationApiView(APIView):
@@ -49,7 +51,18 @@ class InformationApiView(APIView):
         """ Borrar un objeto """
         return Response({'method':'DELETE'})
 
-    
+class InformationViewSet(viewsets.ViewSet):
+    """ Test API ViewSet """
+
+    def list(self, request):
+        """ Retorna mensaje de Hola Mundo """
+
+        a_viewset = [
+            'Usa acciones (list, create, retrieve, update, partial_update)',
+            'Automaticamente mapea a los URLs usando RRouters',
+            'Provee mas funcionalidad con menos codigo',
+        ]
+        return Response({'message':'Hola !','a_viewset':a_viewset})
 
 
 
