@@ -46,3 +46,11 @@
 - API simple
 - Poca personalización de logica
 - Trabaja con estructuras de datos normales
+
+
+## Permisos de Usuario
+**Muy importante:** Está seccion es de gran importancia porque lo que hicimos fue
+colocarle seguridad al APIViewSet de perfiles, porque si no eres la persona dueña
+del perfil no vas a poder editar este. esto se logro creando la clase permissions.py
+en la cual si indica que si no eres dueño de ese perfil y ademas no tienes el token de
+autorizacion no vas a poder editar el perfil.
