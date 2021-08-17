@@ -20,7 +20,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
             # Con esto protejemos la contraseña a la hora de retorno
             'password':{
                 'write_only':True,# La clave se muestra solo cuando estamos creando
-                'style':{'input_type':'password'} # Mostrar asterisco y no los datos
+                'style':{'input_type':'password'} # Mostrar asterisco y no los datos a la hora de crear.
             }
         }
     # Sobreescribimos la funcion para manterner la proteccion de la clave.
