@@ -33,5 +33,13 @@ class UserProfileSerializer(serializers.ModelSerializer):
         )
 
         return user
+    # Con esto lo que hacemos es guardar la contraseña en HAZ,
+    # si no colocaramos el update, la contraseña se guarda en texto plano
+    def update(self, instance, validated_data):
+        """ Actualiza cuenta de usuario """
+        if 'password' in validated_data:
+            password = validated_data.pop('password')
+            instance.set_password(password)
 
+        return super().update(instance, validated_data)
 
