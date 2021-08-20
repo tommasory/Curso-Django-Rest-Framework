@@ -1,10 +1,13 @@
 from rest_framework.serializers import Serializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import status
+from rest_framework import status, filters
 from rest_framework import viewsets
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.authtoken.views import ObtainAuthToken
+from rest_framework.settings import api_settings
 
-from . import serializers
+from . import serializers, models, permissions
 
 class InformationApiView(APIView):
     """ API View de Prueba """
@@ -100,6 +103,21 @@ class InformationViewSet(viewsets.ViewSet):
         """ Destruye un Objeto """
         return Response({'http_method':'DELETE'})
 
+class UserProfileViewSet(viewsets.ModelViewSet):
+    """ Crear y actualizar perfiles """
+    serializer_class = serializers.UserProfileSerializer
+    queryset = models.UserProfile.objects.all()
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (permissions.UpdateOwnProfile,)
+    # Para colocar filtro
+    filter_backends = (filters.SearchFilter,)
+    # Campos de busqueda
+    search_fields = ('name', 'email',)
+
+class UserLoginApiView(ObtainAuthToken):
+    """ Crea tokens de autenticacion de usuario """
+    # Esto se coloca para que muestre la vista pordefecto.
+    renderer_classes = api_settings.DEFAULT_RENDERER_CLASSES
 
 
 
