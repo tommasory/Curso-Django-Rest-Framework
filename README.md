@@ -54,3 +54,25 @@ colocarle seguridad al APIViewSet de perfiles, porque si no eres la persona dueÃ
 del perfil no vas a poder editar este. esto se logro creando la clase permissions.py
 en la cual si indica que si no eres dueÃ±o de ese perfil y ademas no tienes el token de
 autorizacion no vas a poder editar el perfil.
+
+## API Feed del Perfil de Usuario
+
+**Que necesitamos poder hacer**
+
+- Crear nuevos items para el feed
+- Actualizar items, solo si estoy logeado
+- Eliminar items, solo si estoy logeado
+- Ver todos los usuarios status update
+
+**API URLs**
+
+**/api/feed/** --> list items
+               --> Get
+               --> Post
+
+**/api/feed/** --> Menja items especificos
+**<Feed_items_id>**
+               --> Get
+               --> Put
+               --> Delete
+
