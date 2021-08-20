@@ -4,6 +4,8 @@ from rest_framework.response import Response
 from rest_framework import status, filters
 from rest_framework import viewsets
 from rest_framework.authentication import TokenAuthentication
+from rest_framework.authtoken.views import ObtainAuthToken
+from rest_framework.settings import api_settings
 
 from . import serializers, models, permissions
 
@@ -112,6 +114,10 @@ class UserProfileViewSet(viewsets.ModelViewSet):
     # Campos de busqueda
     search_fields = ('name', 'email',)
 
+class UserLoginApiView(ObtainAuthToken):
+    """ Crea tokens de autenticacion de usuario """
+    # Esto se coloca para que muestre la vista pordefecto.
+    renderer_classes = api_settings.DEFAULT_RENDERER_CLASSES
 
 
 
