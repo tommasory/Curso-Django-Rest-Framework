@@ -119,6 +119,14 @@ class UserLoginApiView(ObtainAuthToken):
     # Esto se coloca para que muestre la vista pordefecto.
     renderer_classes = api_settings.DEFAULT_RENDERER_CLASSES
 
+class UserProfileFeedViewSet(viewsets.ModelViewSet):
+    """ Maneja el crear, leer y actualizar del profile feed """
+    authentication_classes = (TokenAuthentication,)
+    serializer_class = serializers.ProfileFeedItemSerializer
+    queryset = models.ProfileFeedItem.objects.all()
 
+    def perform_create(self, serializer):
+        """ Setear el perfil de usuario para el usuario que esta logeado """
+        serializer.save(user_profile=self.request.user)
 
 
