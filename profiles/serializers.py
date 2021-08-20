@@ -1,4 +1,5 @@
 from django.db.models import fields
+from django.db.models.base import Model
 from rest_framework import serializers
 
 from . import models
@@ -42,4 +43,12 @@ class UserProfileSerializer(serializers.ModelSerializer):
             instance.set_password(password)
 
         return super().update(instance, validated_data)
+
+class ProfileFeedItemSerializer(serializers.ModelSerializer):
+    """ Serializador del Profile Feed Items """
+
+    class Meta:
+        model = models.ProfileFeedItem
+        fields = ('id', 'user_profile', 'status_text', 'created_on',)
+        extra_kwars = {'user_profile':{'read_only':True}}
 
