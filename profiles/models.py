@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
 from django.contrib.auth.models import BaseUserManager
+from django.conf import settings
+from django.db.models.deletion import CASCADE
 
 class UserProfileManager(BaseUserManager):
     """ Manager para perfiles de usuario. """
@@ -28,7 +30,6 @@ class UserProfileManager(BaseUserManager):
 
         return user
 
-
 class UserProfile(AbstractBaseUser, PermissionsMixin):
     """ Modelo base de datos para usuarios en el sistema. """
 
@@ -52,5 +53,17 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.email
-    
 
+class ProfileFeedItem(models.Model):
+    """ Perfil de Status Update """
+    user_profile = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=CASCADE
+    )
+
+    status_text = models.CharField(max_length=255)
+    created_on = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        """ Retorna el modelo como cadena """
+        return self.status_text
